@@ -10,21 +10,19 @@
 
 <body>
   <div id="container">
-    <video autoplay="true" id="videoElement">
-
-    </video>
+    <video id="webcam" width="640" height="480" autoplay></video>
+    <button id="takePhoto">Take Photo!</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
   </div>
   <script>
-    var video = document.querySelector("#videoElement");
+    var webcam = document.getElementById('webcam');
 
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
+    // Get access to the camera!
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+        webcam.srcObject = stream;
+        webcam.play();
+      });
     }
   </script>
 </body>
